@@ -1,40 +1,38 @@
-const buttons = document.querySelector('.buttons')
-const semaforo = document.querySelector('#semafaro')
+const lights = document.querySelector("#semafaro");
+const buttons = document.querySelector(".buttons");
 
-let colorIndex = 0
-let interval = null
+let interval = null;
+let colorsIndex = 0;
 
-const trafficLight = (event) =>  {
-    stopLights()
-    turnOn[event.target.id]();
-    
-}
+const trafficLighter = (event) => {
+  stopLights();
+  turnOn[event.target.id]();
+};
+const stopLights = () => {
+  clearInterval(interval);
+};
 
 const nextIndex = () => {
-    if (colorIndex < 2){
-        colorIndex++
-    }else {
-        colorIndex = 0
-    }
-}
-const stopLights = () => {
-    clearInterval (interval)
-}
-
+  if (colorsIndex < 2) {
+    colorsIndex++;
+  } else {
+    colorsIndex = 0;
+  }
+};
 const changeColor = () => {
-    const colors = ['red', 'yellow','green']
-    const color = colors[colorIndex]
-    turnOn[color](); 
-    nextIndex()
-}
+  const colors = ["red", "yellow", "green"];
+  const color = colors[colorsIndex];
+  turnOn[color]();
+  nextIndex();
+};
+
 const turnOn = {
-    'red':    () => semaforo.src = 'img/vermelho.png',
-    'yellow':     () => semaforo.src = 'img/amarelo.png',
-    'green':  () => semaforo.src = 'img/verde.png',
-    'pifado': () => interval = setInterval(changeColor, 500)
-}
+  red: () => (lights.src = "img/vermelho.png"),
+  yellow: () => (lights.src = "img/amarelo.png"),
+  green: () => (lights.src = "img/verde.png"),
+  automatic: () => (interval = setInterval(changeColor, 1000)),
+};
 
-buttons.addEventListener('click', trafficLight);
-
+buttons.addEventListener("click", trafficLighter);
 
 // console.log(event.target.id)  // encontra a target de onde você está clicando e id
