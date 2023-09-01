@@ -1,30 +1,38 @@
-let turnOn = document.querySelector('#lig')
-const turnOff = document.querySelector('#des')
-const lamp = document.querySelector('#lampada')
+const buttons = document.querySelector(".buttons");
+const lamp = document.querySelector("#image");
 
-function lampBroken (){
+const findLamp = (event) => {
+  turnOn[event.target.id]();
+};
+
+function lampBroken  () {
 
     return lamp.src.indexOf('quebrada') > -1
-}
-
-function onLamp() {
-
-   if (!lampBroken()) {
-    lamp.src = 'img/ligada.jpg'
-}}
-
-function offLamp(){
-    if (!lampBroken()) {
-        lamp.src = 'img/desligada.jpg'
     
-}}
-
-function broken(){
-    lamp.src ='img/quebrada.jpg'
 }
 
-turnOn.addEventListener('click', onLamp);
-turnOff.addEventListener('click', offLamp);
-lamp.addEventListener('mouseover', onLamp);
-lamp.addEventListener('mouseout', offLamp);
-lamp.addEventListener('dblclick', broken);
+const onLight = () => {
+  if ( !lampBroken() ) {
+  lamp.src = "img/ligada.jpg";
+
+}};
+const offLight = () => {
+  if ( !lampBroken() ) {
+
+  lamp.src = "img/desligada.jpg";
+}};
+const lightBroken = () => {
+    lamp.src = "img/quebrada.jpg";
+}
+
+
+const turnOn = {
+  on: () => (onLight()),
+  off: () => (offLight()),
+};
+
+
+buttons.addEventListener("click", findLamp);
+lamp.addEventListener("mouseover", onLight);
+lamp.addEventListener("mouseout", offLight);
+lamp.addEventListener("dblclick", lightBroken);
